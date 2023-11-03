@@ -1,11 +1,12 @@
+import Navbar from '../components/layout/Navbar';
 interface ILayout {
   children: JSX.Element;
 }
 function Layout({children}: ILayout) {
   return (
-    <div>
-      <div>nav</div>
-      <div>{children}</div>
+    <div className='max-w-[1440px] px-[81px] pt-[28px] mx-auto'>
+      <Navbar />
+      <main>{children}</main>
     </div>
   );
 }
