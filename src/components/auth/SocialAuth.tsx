@@ -2,10 +2,10 @@ import Button from '../ui/button/Button';
 
 function SocialAuth() {
   return (
-    <div className='mt-[30px] flex justify-center md:justify-between items-center flex-wrap gap-2'>
+    <div className='mt-[30px] flex justify-center md:justify-between items-center flex-wrap gap-3 md:gap-2'>
       <Button
         variation='auth'
-        className='w-[255px]'
+        className='w-full md:w-[255px]'
         icon={
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -37,7 +37,7 @@ function SocialAuth() {
       </Button>
       <Button
         variation='auth'
-        className='w-[255px] '
+        className='w-full md:w-[255px] '
         icon={
           <svg
             xmlns='http://www.w3.org/2000/svg'

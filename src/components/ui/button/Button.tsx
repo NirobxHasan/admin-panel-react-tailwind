@@ -8,16 +8,16 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 function Button({children, icon, variation, className, ...props}: ButtonProps) {
   let twClass =
-    'text-[16px]  bg-[#377DFF] py-4 md:py-[19px] px-[16px] rounded-[16px] text-white w-[540px]';
+    'text-[16px]  bg-[#377DFF] py-3 md:py-[19px] px-[16px] rounded-[16px] text-white w-[540px]';
 
   if (variation === 'primary') {
     twClass = twMerge(
-      'text-[16px]  bg-[#377DFF] py-4 md:py-[19px] px-[16px] rounded-[16px] text-white',
+      'text-[16px]  bg-[#377DFF] py-3 md:py-[19px] px-[16px] rounded-[16px] text-white',
       className
     );
   } else if (variation === 'auth') {
     twClass = twMerge(
-      'text-[16px]  bg-[#F0F5FA] py-4 md:py-[19px] px-[30px] rounded-[16px] text-[#8A94A6]',
+      'text-[16px]  bg-[#F0F5FA] py-3 md:py-[19px] px-[30px] rounded-[16px] text-[#8A94A6]',
       className
     );
   }
