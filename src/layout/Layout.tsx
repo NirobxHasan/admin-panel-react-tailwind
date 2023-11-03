@@ -4,7 +4,7 @@ interface ILayout {
 }
 function Layout({children}: ILayout) {
   return (
-    <div className='max-w-[1440px] px-[81px] pt-[28px] mx-auto'>
+    <div className='max-w-[1440px] px-2 md:px-[81px] pt-[28px] mx-auto'>
       <Navbar />
       <main>{children}</main>
     </div>

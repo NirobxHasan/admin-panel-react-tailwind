@@ -21,9 +21,9 @@ function Navbar() {
             <path
               d='M1 1L5.5 6L10 1'
               stroke='#B0B7C3'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </svg>
         </button>
