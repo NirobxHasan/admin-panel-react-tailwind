@@ -1,12 +1,18 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {BsSearch} from 'react-icons/bs';
-import {Outlet} from 'react-router-dom';
+import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import userImage from '../assets/images/user.png';
 import logo from '../assets/logo/logo.svg';
 import Button from '../components/ui/button/Button';
 function DashboardLayout() {
-  const [isOpen, setIsOpen] = useState(false);
+  const {pathname} = useLocation();
+  const navigate = useNavigate();
+  const [active, setActive] = useState('');
+  useEffect(() => {
+    setActive(pathname.substring(1));
+  }, [pathname]);
 
+  const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -29,23 +35,32 @@ function DashboardLayout() {
           <Button
             icon={<DashboardIcon />}
             variation='secondary'
-            className='text-[14px] w-full bg-white'
+            className={`text-[14px] w-full ${
+              active === 'dashboard' ? '' : 'bg-white'
+            } `}
+            onClick={() => navigate('/dashboard')}
           >
             Dashboard
           </Button>
           <Button
             icon={<UserIcon />}
             variation='secondary'
-            className='text-[14px] w-full'
+            className={`text-[14px] w-full ${
+              active === 'user' ? '' : 'bg-white'
+            } `}
+            onClick={() => navigate('/user')}
           >
             User
           </Button>
           <Button
             icon={<SalesIcon />}
             variation='secondary'
-            className='text-[14px] w-full bg-white'
+            className={`text-[14px] w-full ${
+              active === 'sales' ? '' : 'bg-white'
+            } `}
+            onClick={() => navigate('/sales')}
           >
-            User
+            Sales
           </Button>
         </div>
       </div>
