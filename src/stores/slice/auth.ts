@@ -49,6 +49,24 @@ export const signinAPICall =
       dispatch(apiCallFailure(error.response.data.error));
     }
   };
+//Sign Up Action
+export const signupAPICall =
+  (body: AuthData): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(apiCallStart());
+      const response = await makeAxiosRequest(
+        API_ENPOINTS.REGISTER,
+        'POST',
+        body
+      );
+      console.log(response.data);
+      dispatch(apiCallSuccess(response.data));
+    } catch (error: any) {
+      console.log(error.response.data.error);
+      dispatch(apiCallFailure(error.response.data.error));
+    }
+  };
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

@@ -1,44 +1,92 @@
+import {useState} from 'react';
+import {SubmitHandler, useForm} from 'react-hook-form';
+import {LineWave} from 'react-loader-spinner';
+import {useDispatch, useSelector} from 'react-redux';
+import {signupAPICall} from '../../stores/slice/auth';
+import {RootState} from '../../stores/store';
 import Button from '../ui/button/Button';
 import CheckInput from '../ui/input/CheckInput';
 import PasswordInput from '../ui/input/PasswordInput';
 import TextInput from '../ui/input/TextInput';
-
-type IEvent = React.ChangeEvent<HTMLFormElement>;
-
+import ErrorText from '../ui/typography/ErrorText';
+type Inputs = {
+  email: string;
+  username: string;
+  password: string;
+};
 function SignUpForm() {
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(e);
+  const dispatch = useDispatch<any>();
+  const {loading, error} = useSelector((state: RootState) => state.auth);
+  const [policyChecked, setPolicyChecked] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    const body = {
+      email: data.email,
+      password: data.password,
+    };
+    if (!policyChecked) {
+      return;
+    } else {
+      dispatch(signupAPICall(body));
+    }
   };
+
   return (
-    <form className='space-y-[16px]' onSubmit={handleOnSubmit}>
+    <form className='space-y-[16px]' onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         placeholder='Your Email'
-        onChange={(e: IEvent) => console.log(e.target.value)}
-        error=''
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+            message: 'Invalid email address',
+          },
+        })}
+        error={errors.email && errors.email.message}
         icon={<EmailIcon />}
       />
       <TextInput
         placeholder='Your Name'
-        onChange={(e: IEvent) => console.log(e.target.value)}
-        error=''
+        {...register('username', {
+          required: 'Name is required',
+        })}
+        error={errors.username && errors.username.message}
         icon={<UserIcon />}
       />
       <PasswordInput
-        onChange={(e: IEvent) => console.log(e.target.value)}
-        error=''
+        {...register('password', {required: true})}
+        error={errors.password && 'Password is required'}
       />
       <CheckInput
         label={'I agree to the Terms & Conditions'}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          console.log(e.target.checked)
+          setPolicyChecked(e.target.checked)
         }
-        error={true}
+        error={!policyChecked}
       />
-
-      <Button variation='primary' className='w-full'>
-        Sign Up
-      </Button>
+      {error && <ErrorText>{error}</ErrorText>}
+      {loading ? (
+        <div className='w-full flex justify-center'>
+          <LineWave
+            height={'100%'}
+            width={'100'}
+            color='#4fa94d'
+            ariaLabel='line-wave'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={true}
+          />
+        </div>
+      ) : (
+        <Button variation='primary' className='w-full'>
+          Sign Up
+        </Button>
+      )}
     </form>
   );
 }

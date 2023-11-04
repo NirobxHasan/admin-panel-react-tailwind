@@ -14,8 +14,8 @@ type Inputs = {
 };
 function SignInForm() {
   const dispatch = useDispatch<any>();
-  const {loading, token, error} = useSelector((state: RootState) => state.auth);
-  console.log(loading, token, error);
+  const {loading, error} = useSelector((state: RootState) => state.auth);
+
   const {
     register,
     handleSubmit,
