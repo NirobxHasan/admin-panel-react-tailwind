@@ -69,7 +69,7 @@ function DashboardLayout() {
       <div className='flex-1 flex flex-col'>
         {/* Navbar */}
         <div className=' py-[23px] flex items-center justify-between px-4'>
-          <button className='text-white md:hidden' onClick={toggleSidebar}>
+          <button className='text-gray-500 md:hidden' onClick={toggleSidebar}>
             <svg
               className='w-6 h-6'
               fill='none'

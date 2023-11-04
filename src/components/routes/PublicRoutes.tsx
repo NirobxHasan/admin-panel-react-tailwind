@@ -7,7 +7,7 @@ function PublicRoutes() {
   const location = useLocation();
 
   return !loading && token ? (
-    <Navigate to={'/dashboard'} state={{from: location}} replace />
+    <Navigate to={'/user'} state={{from: location}} replace />
   ) : (
     <Outlet />
   );

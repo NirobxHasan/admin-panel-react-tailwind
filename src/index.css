@@ -6,7 +6,8 @@
   font-family: 'Inter', sans-serif;
 }
 
-@layer base {
-  body {
+@layer components {
+  .table-row {
+    @apply px-6 py-3 text-left text-xs font-medium text-[#4E5D78] uppercase tracking-wider;
   }
 }

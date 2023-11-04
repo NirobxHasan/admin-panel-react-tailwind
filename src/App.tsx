@@ -20,7 +20,7 @@ function App() {
         </Route>
         <Route element={<DashboardLayout />}>
           <Route element={<PrivateRoutes />}>
-            <Route path='/' element={<Navigate to='/dashboard' replace />} />
+            <Route path='/' element={<Navigate to='/user' replace />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/user' element={<User />} />
             <Route path='/sales' element={<Sales />} />
