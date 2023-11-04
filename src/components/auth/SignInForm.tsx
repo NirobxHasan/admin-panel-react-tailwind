@@ -1,3 +1,6 @@
+import {useDispatch, useSelector} from 'react-redux';
+import {signinAPICall} from '../../stores/slice/auth';
+import {RootState} from '../../stores/store';
 import Button from '../ui/button/Button';
 import CheckInput from '../ui/input/CheckInput';
 import PasswordInput from '../ui/input/PasswordInput';
@@ -6,9 +9,19 @@ import TextInput from '../ui/input/TextInput';
 type IEvent = React.ChangeEvent<HTMLFormElement>;
 
 function SignInForm() {
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const dispatch = useDispatch<any>();
+  const {loading, token, error} = useSelector((state: RootState) => state.auth);
+  console.log(loading, token, error);
+  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e);
+
+    const body = {
+      email: 'eve.holt@reqres.insdf',
+      password: 'cityslicka',
+    };
+
+    dispatch(signinAPICall(body));
   };
   return (
     <form className='space-y-[16px]' onSubmit={handleOnSubmit}>
