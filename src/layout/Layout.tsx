@@ -1,8 +1,6 @@
 import {Outlet} from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
-interface ILayout {
-  children: JSX.Element;
-}
+
 function Layout() {
   return (
     <div className='max-w-[1440px] px-4 md:px-[81px] pt-[28px] mx-auto '>

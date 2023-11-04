@@ -3,7 +3,7 @@ import {twMerge} from 'tailwind-merge';
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   icon?: React.ReactNode;
-  variation: 'primary' | 'auth';
+  variation: 'primary' | 'secondary';
   className?: string;
 };
 function Button({children, icon, variation, className, ...props}: ButtonProps) {
@@ -15,7 +15,7 @@ function Button({children, icon, variation, className, ...props}: ButtonProps) {
       'text-[16px]  bg-[#377DFF] py-3 md:py-[19px] px-[16px] rounded-[16px] text-white',
       className
     );
-  } else if (variation === 'auth') {
+  } else if (variation === 'secondary') {
     twClass = twMerge(
       'text-[16px]  bg-[#F0F5FA] py-3 md:py-[19px] px-[30px] rounded-[16px] text-[#8A94A6]',
       className

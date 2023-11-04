@@ -4,7 +4,7 @@ function SocialAuth() {
   return (
     <div className='mt-[30px] flex justify-center md:justify-between items-center flex-wrap gap-3 md:gap-2'>
       <Button
-        variation='auth'
+        variation='secondary'
         className='w-full md:w-[255px]'
         icon={
           <svg
@@ -36,7 +36,7 @@ function SocialAuth() {
         Sign In with Google
       </Button>
       <Button
-        variation='auth'
+        variation='secondary'
         className='w-full md:w-[255px] '
         icon={
           <svg
