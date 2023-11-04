@@ -19,7 +19,7 @@ const TextInput = forwardRef(
             ref={ref}
             placeholder={placeholder}
             autoComplete='false'
-            className='py-[18px] w-full focus:outline-none focus:bg-white'
+            className='py-[18px] w-full focus:outline-none  autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] '
             {...rest}
           />
         </div>
