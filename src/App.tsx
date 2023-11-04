@@ -1,5 +1,8 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom';
+import PrivateRoutes from './components/routes/PrivateRoutes';
+import PublicRoutes from './components/routes/PublicRoutes';
 import Layout from './layout/Layout';
+import Dashboard from './pages/Dashboard';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 function App() {
@@ -7,9 +10,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path='/' element={<SignIn />} />
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route element={<PublicRoutes />}>
+            <Route path='/signin' element={<SignIn />} />
+            <Route path='/signup' element={<SignUp />} />
+          </Route>
+
+          <Route element={<PrivateRoutes />}>
+            <Route path='/' element={<Navigate to='/dashboard' replace />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

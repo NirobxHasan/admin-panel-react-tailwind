@@ -1,4 +1,5 @@
 import {SubmitHandler, useForm} from 'react-hook-form';
+import {LineWave} from 'react-loader-spinner';
 import {useDispatch, useSelector} from 'react-redux';
 import {signinAPICall} from '../../stores/slice/auth';
 import {RootState} from '../../stores/store';
@@ -6,6 +7,7 @@ import Button from '../ui/button/Button';
 import CheckInput from '../ui/input/CheckInput';
 import PasswordInput from '../ui/input/PasswordInput';
 import TextInput from '../ui/input/TextInput';
+import ErrorText from '../ui/typography/ErrorText';
 type Inputs = {
   email: string;
   password: string;
@@ -48,9 +50,24 @@ function SignInForm() {
           console.log(e.target.checked)
         }
       />
-      <Button variation='primary' className='w-full'>
-        Sign In
-      </Button>
+      {error && <ErrorText>{error}</ErrorText>}
+      {loading ? (
+        <div className='w-full flex justify-center'>
+          <LineWave
+            height={'100%'}
+            width={'100'}
+            color='#4fa94d'
+            ariaLabel='line-wave'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={true}
+          />
+        </div>
+      ) : (
+        <Button variation='primary' className='w-full'>
+          Sign In
+        </Button>
+      )}
     </form>
   );
 }
