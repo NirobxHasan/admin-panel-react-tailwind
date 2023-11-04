@@ -9,6 +9,7 @@ interface IInputProps {
 }
 
 interface ITextInputProps extends IInputProps {
+  placeholder: string;
   icon: React.ReactNode;
 }
 

@@ -1,6 +1,6 @@
 import ErrorText from '../typography/ErrorText';
 
-function TextInput({onChange, error, icon}: ITextInputProps) {
+function TextInput({onChange, error, icon, placeholder}: ITextInputProps) {
   return (
     <div>
       <div
@@ -10,8 +10,8 @@ function TextInput({onChange, error, icon}: ITextInputProps) {
       >
         <div>{icon}</div>
         <input
-          type='email'
-          placeholder='Your Email'
+          type='text'
+          placeholder={placeholder}
           className='py-[18px] w-full focus:outline-none '
           onChange={onChange}
         />
