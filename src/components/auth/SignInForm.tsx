@@ -1,3 +1,4 @@
+import {SubmitHandler, useForm} from 'react-hook-form';
 import {useDispatch, useSelector} from 'react-redux';
 import {signinAPICall} from '../../stores/slice/auth';
 import {RootState} from '../../stores/store';
@@ -5,44 +6,48 @@ import Button from '../ui/button/Button';
 import CheckInput from '../ui/input/CheckInput';
 import PasswordInput from '../ui/input/PasswordInput';
 import TextInput from '../ui/input/TextInput';
-
-type IEvent = React.ChangeEvent<HTMLFormElement>;
-
+type Inputs = {
+  email: string;
+  password: string;
+};
 function SignInForm() {
   const dispatch = useDispatch<any>();
   const {loading, token, error} = useSelector((state: RootState) => state.auth);
   console.log(loading, token, error);
-  const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(e);
-
-    const body = {
-      email: 'eve.holt@reqres.insdf',
-      password: 'cityslicka',
-    };
-
-    dispatch(signinAPICall(body));
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    dispatch(signinAPICall(data));
   };
+
   return (
-    <form className='space-y-[16px]' onSubmit={handleOnSubmit}>
+    <form className='space-y-[16px]' onSubmit={handleSubmit(onSubmit)}>
       <TextInput
         placeholder='Your Email'
-        onChange={(e: IEvent) => console.log(e.target.value)}
-        error=''
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
+            message: 'Invalid email address',
+          },
+        })}
+        error={errors.email && errors.email.message}
         icon={<EmailIcon />}
       />
       <PasswordInput
-        onChange={(e: IEvent) => console.log(e.target.value)}
-        error=''
+        {...register('password', {required: true})}
+        error={errors.password && 'Password is required'}
       />
       <CheckInput
         label={'Remember Me'}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           console.log(e.target.checked)
         }
-        error={true}
       />
-
       <Button variation='primary' className='w-full'>
         Sign In
       </Button>

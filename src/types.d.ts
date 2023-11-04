@@ -1,11 +1,12 @@
+import {InputHTMLAttributes} from 'react';
+
 interface IUIProps {
   children: React.ReactNode;
   className?: string;
 }
 
-interface IInputProps {
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  error?: string;
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  error?: string | undefined;
 }
 
 interface ITextInputProps extends IInputProps {
