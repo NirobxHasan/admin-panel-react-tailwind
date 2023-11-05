@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {IoIosArrowBack} from 'react-icons/io';
 import {MdOutlineKeyboardDoubleArrowLeft} from 'react-icons/md';
+import {Puff} from 'react-loader-spinner';
 import {useGetUsersList} from '../api/hooks/user/useGetUsersList';
 import HeaderTitle from '../components/ui/typography/HeaderTitle';
 import UserTable from '../components/user/UserTable';
@@ -19,7 +20,8 @@ function User() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   // const [data, setData] = useState({});
 
-  const {data, refetch} = useGetUsersList(currentPage);
+  const {data, isLoading, refetch} = useGetUsersList(currentPage);
+  console.log(isLoading);
 
   useEffect(() => {
     console.log(currentPage);
@@ -40,7 +42,23 @@ function User() {
       <div>
         <HeaderTitle>Users List</HeaderTitle>
       </div>
-      <UserTable users={data?.data.data} />
+      {isLoading ? (
+        <div className='w-full h-[60vh] flex justify-center items-center'>
+          <Puff
+            height='150'
+            width='150'
+            radius={1}
+            color='#2F80ED'
+            ariaLabel='puff-loading'
+            wrapperStyle={{}}
+            wrapperClass=''
+            visible={true}
+          />
+        </div>
+      ) : (
+        <UserTable users={data?.data.data} />
+      )}
+
       <div className='flex items-center gap-[5px]'>
         <button
           onClick={() => handleNextPrevious('start')}
