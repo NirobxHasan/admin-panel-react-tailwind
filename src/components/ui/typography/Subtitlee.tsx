@@ -1,4 +1,5 @@
 import {twMerge} from 'tailwind-merge';
+import {IUIProps} from '../../../types';
 function SubTitle({children, className}: IUIProps) {
   const twClass = twMerge('text-[18px] text-[#8A94A6] font-medium', className);
   return <h1 className={twClass}>{children}</h1>;

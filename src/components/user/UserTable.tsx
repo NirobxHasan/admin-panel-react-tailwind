@@ -48,17 +48,3 @@ function UserTable({users}: IUserTableProps) {
 }
 
 export default UserTable;
-const data = [
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/50',
-    email: 'johndoe@example.com',
-  },
-  {
-    id: 1,
-    image: 'https://via.placeholder.com/50',
-    email: 'johndoe@example.com',
-  },
-
-  // Add more data as needed
-];
