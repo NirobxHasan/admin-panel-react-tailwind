@@ -1,5 +1,15 @@
 import UserRow from './UserRow';
-function UserTable() {
+export interface IUser {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+}
+interface IUserTableProps {
+  users: IUser[];
+}
+function UserTable({users}: IUserTableProps) {
   return (
     <div className='container mx-auto px-4 sm:px-6 lg:px-8 py-8 '>
       <div className='mt-4'>
@@ -21,12 +31,15 @@ function UserTable() {
             </tr>
           </thead>
           <tbody className='bg-white'>
-            <UserRow
-              id='1'
-              img='https://via.placeholder.com/50'
-              name='asef awef'
-              email='ashdfs'
-            />
+            {users?.map((user: IUser) => (
+              <UserRow
+                key={user.id}
+                id={user.id}
+                img={user.avatar}
+                name={`${user.first_name} ${user.last_name}`}
+                email={user.email}
+              />
+            ))}
           </tbody>
         </table>
       </div>
