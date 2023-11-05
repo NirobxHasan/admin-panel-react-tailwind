@@ -6,27 +6,13 @@ import {useGetUsersList} from '../api/hooks/user/useGetUsersList';
 import HeaderTitle from '../components/ui/typography/HeaderTitle';
 import UserTable from '../components/user/UserTable';
 function User() {
-  const datax = {
-    page: 2,
-    per_page: 6,
-    total: 12,
-    total_pages: 2,
-  };
-  const pageNumbers = [];
-  for (let i = 1; i <= datax.total_pages; i++) {
-    pageNumbers.push(i);
-  }
-
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // const [data, setData] = useState({});
-
   const {data, isLoading, refetch} = useGetUsersList(currentPage);
-  console.log(isLoading);
 
   useEffect(() => {
-    console.log(currentPage);
     refetch();
   }, [currentPage, refetch]);
+
   const handleNextPrevious = (
     direaction: 'start' | 'end' | 'next' | 'prev'
   ) => {
@@ -37,6 +23,7 @@ function User() {
       currentPage < data?.data.total_pages &&
       setCurrentPage(currentPage + 1);
   };
+
   return (
     <div>
       <div>

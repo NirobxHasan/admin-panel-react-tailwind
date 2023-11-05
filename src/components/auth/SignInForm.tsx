@@ -22,7 +22,6 @@ function SignInForm() {
     formState: {errors},
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     dispatch(signinAPICall(data));
   };
 

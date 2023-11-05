@@ -42,10 +42,8 @@ export const signinAPICall =
     try {
       dispatch(apiCallStart());
       const response = await makeAxiosRequest(API_ENPOINTS.LOGIN, 'POST', body);
-      console.log(response.data);
       dispatch(apiCallSuccess(response.data));
     } catch (error: any) {
-      console.log(error.response.data.error);
       dispatch(apiCallFailure(error.response.data.error));
     }
   };
@@ -60,10 +58,9 @@ export const signupAPICall =
         'POST',
         body
       );
-      console.log(response.data);
+
       dispatch(apiCallSuccess(response.data));
     } catch (error: any) {
-      console.log(error.response.data.error);
       dispatch(apiCallFailure(error.response.data.error));
     }
   };

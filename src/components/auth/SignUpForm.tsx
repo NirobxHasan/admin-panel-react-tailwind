@@ -24,7 +24,6 @@ function SignUpForm() {
     formState: {errors},
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     const body = {
       email: data.email,
       password: data.password,
