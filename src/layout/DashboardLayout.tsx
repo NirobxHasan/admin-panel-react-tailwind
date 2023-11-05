@@ -1,13 +1,18 @@
 import {useEffect, useState} from 'react';
+import {BiLogOut} from 'react-icons/bi';
 import {BsSearch} from 'react-icons/bs';
+import {useDispatch} from 'react-redux';
 import {Outlet, useLocation, useNavigate} from 'react-router-dom';
 import userImage from '../assets/images/user.png';
 import logo from '../assets/logo/logo.svg';
 import Button from '../components/ui/button/Button';
+import {logout} from '../stores/slice/auth';
 function DashboardLayout() {
   const {pathname} = useLocation();
   const navigate = useNavigate();
   const [active, setActive] = useState('');
+
+  const dispatch = useDispatch();
   useEffect(() => {
     setActive(pathname.substring(1));
   }, [pathname]);
@@ -15,6 +20,10 @@ function DashboardLayout() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
@@ -61,6 +70,14 @@ function DashboardLayout() {
             onClick={() => navigate('/sales')}
           >
             Sales
+          </Button>
+          <Button
+            icon={<BiLogOut size={18} />}
+            variation='secondary'
+            className={`text-[14px] w-full bg-white `}
+            onClick={handleLogout}
+          >
+            Logout
           </Button>
         </div>
       </div>

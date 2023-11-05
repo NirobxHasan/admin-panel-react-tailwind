@@ -30,9 +30,13 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    logout(state) {
+      state.token = null;
+    },
   },
 });
-export const {apiCallStart, apiCallSuccess, apiCallFailure} = authSlice.actions;
+export const {apiCallStart, apiCallSuccess, apiCallFailure, logout} =
+  authSlice.actions;
 export default authSlice.reducer;
 
 //Sign In Action
